@@ -1,0 +1,9 @@
+﻿[
+  {
+    "Key": "Notepad",
+    "Utterance": "Notepad",
+    "ConfirmationText": "Running the test command that will launch notepad.",
+    "Executable": "notepad.exe",
+    "InitialDirectory": "C:\\Windows"
+  }
+]
