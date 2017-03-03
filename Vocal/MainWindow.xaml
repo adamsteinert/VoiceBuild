@@ -18,8 +18,8 @@
 
 
         <StackPanel>
+            <CheckBox Content="Test Only" Name="cbTestOnlyMode" IsChecked="False" />            
             <Button Content="Listen" Width="100" Height="75" Click="Button_Click" />
-
             <TextBlock Name="RecognizedText" />
             <TextBlock Name="CurrentExecution" />
         </StackPanel>

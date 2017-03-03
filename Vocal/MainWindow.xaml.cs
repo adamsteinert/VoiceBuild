@@ -87,7 +87,11 @@ namespace Vocal
                 System.Threading.Thread.Sleep(1000);
 
                 System.Diagnostics.Debug.WriteLine("Found semantic key command" + commandKey);
-                ExecuteCommandInList(commandKey);
+
+                if (!IsTestOnlyMode)
+                {
+                    ExecuteCommandInList(commandKey);
+                }
             }
             else
             {
@@ -96,6 +100,17 @@ namespace Vocal
         }
 
         #endregion
+
+        private bool IsTestOnlyMode
+        {
+            get
+            {
+                if (!cbTestOnlyMode.IsChecked.HasValue)
+                    cbTestOnlyMode.IsChecked = false;
+
+                return cbTestOnlyMode.IsChecked.Value;
+            }
+        }
 
 
         private void ReloadCommandsAndGrammar()

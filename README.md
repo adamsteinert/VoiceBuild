@@ -28,19 +28,19 @@ Add new commands via the commands.json file that is created in the app directory
 
 ###### Wishlist
 
-- Nice UI
-- Live and activate in the system tray
-- Display loaded commands and descriptions.
-- Enable continuous listen mode
-- Enable different execution contexts beyond cmd window
+- _ Nice UI
+- _ Live in and activate via the system tray
+- _ Display loaded commands and descriptions.
+- _ Enable continuous listen mode
+- _ Enable different execution contexts beyond cmd window
 - - powershell, cmder, alternate VS environments
 - - User configurable
-- Expand range of commands. e
+- _ Expand range of commands. e
 - - .g. build, run, launch etc...
 - - User configurable
-- Distributed execution across machines
-- Kick off CI builds
-
+- _ Distributed execution across machines (akka)
+- _ Kick off CI builds
+- ++x++ Enable test mode.
 
 
 ###### Icons
