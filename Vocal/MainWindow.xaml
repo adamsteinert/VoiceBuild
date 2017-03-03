@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vocal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
-        Loaded="Window_Loaded">
+        Title="Voice Build Tool" Height="350" Width="525"
+        Loaded="Window_Loaded" Icon="/Vocal;component/mic_flat.ico">
     
     <DockPanel>
         
