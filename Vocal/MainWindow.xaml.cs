@@ -29,6 +29,8 @@ namespace Vocal
         SpeechRecognitionEngine _recognizer;
         VocalResponse _responder;
 
+        Dictionary<string, LauncherDefinition> _launchers = new Dictionary<string, LauncherDefinition>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,11 +55,15 @@ namespace Vocal
                 CurrentExecution.Text = "Unrecognized execution id " + executionId;
             }
 
-            var executor = new GenericProcessExecutor(ExecutionEnvironment.CreateDefaultCmd());
+
+
+            var executor = new GenericCommandWindowLauncher(Launcher.CreateDefaultCmd());
 
 
             executor.Execute(_enabledCommands[executionId]);
         }
+
+        private ILauncher GetLauncher()
 
         #endregion
 
@@ -115,8 +121,20 @@ namespace Vocal
 
         private void ReloadCommandsAndGrammar()
         {
-            ReloadVoiceCommands(_enabledCommands);
+            var commandDef = ReloadVoiceCommands(_enabledCommands);
+            CreateLaunchers(commandDef);
+
             RebuildGrammar(_recognizer, _enabledCommands);
+        }
+
+        private void CreateLaunchers(CommandDefinition commandDef)
+        {
+            _launchers.Clear();
+
+            foreach (var item in commandDef.Launchers)
+            {
+                _launchers.Add(item.Key, item);
+            }
         }
 
         public static void RebuildGrammar(SpeechRecognitionEngine engine, Dictionary<string, IVoiceCommand> commandDictionary)
@@ -126,21 +144,24 @@ namespace Vocal
             engine.LoadGrammar(new Grammar(builder));
         }
 
-        public static void ReloadVoiceCommands(Dictionary<string, IVoiceCommand> commandDictionary)
+        public static CommandDefinition ReloadVoiceCommands(Dictionary<string, IVoiceCommand> commandDictionary)
         {
             try
             {
                 commandDictionary.Clear();
-                var commands = JsonCommandLoader.LoadCommandsFromConfiguration();
+                var definition = JsonCommandLoader.LoadCommandsFromConfiguration();
 
-                foreach (var item in commands)
+                foreach (var item in definition.Commands)
                 {
                     commandDictionary.Add(item.Key, item);
                 }
+
+                return definition;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"There was an error loading voice commands: {ex.Message}", "Loading Error");
+                return null;
             }
         }
 

@@ -12,7 +12,7 @@ namespace Vocal.Core
         const string DefaultConfigFile = "commandsTemplate.json";
         const string WriteableCommandFile = "commands.json";
 
-        public static IEnumerable<IVoiceCommand> LoadCommandsFromConfiguration()
+        public static CommandDefinition LoadCommandsFromConfiguration()
         {
             var commandFile = GetDefaultPath(WriteableCommandFile);
 
@@ -30,7 +30,7 @@ namespace Vocal.Core
                 throw new Exception($"There was an error creating the command configuration file {commandFile}. You may need to create this file manually.");
 
 
-            return JsonConvert.DeserializeObject<VoiceCommand[]>(File.ReadAllText(commandFile));
+            return JsonConvert.DeserializeObject<CommandDefinition>(File.ReadAllText(commandFile));
         }
 
        

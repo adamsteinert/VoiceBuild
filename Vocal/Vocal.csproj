@@ -65,9 +65,13 @@
     </ApplicationDefinition>
     <Compile Include="Core\ConfigBasedGrammarBuilder.cs" />
     <Compile Include="Core\JsonCommandLoader.cs" />
+    <Compile Include="Executors\GenericCommandWindowLauncher.cs" />
+    <Compile Include="Executors\GenericProcessLauncher.cs" />
+    <Compile Include="Executors\ILauncher.cs" />
     <Compile Include="Executors\IProcessHandle.cs" />
     <Compile Include="Executors\ProcessHandle.cs" />
     <Compile Include="Model\AppSettings.cs" />
+    <Compile Include="Model\CommandDefinition.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\ExecutionEnvironment.cs" />
     <Compile Include="Model\IVoiceCommand.cs" />
@@ -80,13 +84,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Executors\GenericProcessExecutor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Launcher.cs" />
     <Compile Include="Model\VoiceCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

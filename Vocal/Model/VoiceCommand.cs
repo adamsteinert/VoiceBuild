@@ -34,6 +34,10 @@ namespace Vocal.Model
         public string InitialDirectory { get; set; }
 
 
+        public string LauncherKey { get; set; }
+
+        public string LaunchArgs { get; set; }
+
         /// <summary>
         /// Builds a command string to be run within the execution environment
         /// 

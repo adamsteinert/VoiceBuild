@@ -28,7 +28,7 @@ Add new commands via the commands.json file that is created in the app directory
 
 ###### Wishlist
 
-- _ Move configuration file to ProgramData
+
 - _ Nice UI
 - _ Live in and activate via the system tray
 - _ Display loaded commands and descriptions.
@@ -42,7 +42,7 @@ Add new commands via the commands.json file that is created in the app directory
 - _ Distributed execution across machines (akka)
 - _ Kick off CI builds
 - ++x++ Enable test mode.
-
+- ++x++ Move configuration file to AppData
 
 ###### Icons
 

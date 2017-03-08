@@ -34,5 +34,9 @@ namespace Vocal.Model
         /// The text used to identify the command within the grammar
         /// </summary>
         string Utterance { get; set; }
+
+        string LauncherKey { get; set; }
+
+        string LaunchArgs { get; set; }
     }
 }
