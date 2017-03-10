@@ -6,25 +6,31 @@
         xmlns:local="clr-namespace:Vocal"
         mc:Ignorable="d"
         Title="Voice Build Tool" Height="350" Width="525"
-        Loaded="Window_Loaded" Icon="/Vocal;component/mic_flat.ico">
-    
-    <DockPanel>
-        
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <!--<MenuItem Header="Reload Voice Commands" ToolTip="Reloads voice command from configuration.json" />-->
-            </MenuItem>
-        </Menu>
+        Loaded="Window_Loaded" Icon="/Vocal;component/mic_flat.ico"
+        xmlns:tb="http://www.hardcodet.net/taskbar">
+    <Grid>
+        <tb:TaskbarIcon x:Name="myNotifyIcon" IconSource="/Vocal;component/mic_flat.ico">
+            <!--https://bitbucket.org/hardcodet/notifyicon-wpf/src/a72c42d41e187761d27486f4c031f78f0018f2b1/Hardcodet.NotifyIcon.Wpf/Source/Sample%20Project/Tutorials/?at=master-->
+        </tb:TaskbarIcon>
+
+        <DockPanel>
+
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <!--<MenuItem Header="Reload Voice Commands" ToolTip="Reloads voice command from configuration.json" />-->
+                </MenuItem>
+            </Menu>
 
 
-        <StackPanel>
-            <CheckBox Content="Test Only" Name="cbTestOnlyMode" IsChecked="False" />            
-            <Button Content="Listen" Width="100" Height="75" Click="Button_Click" />
-            <TextBlock Name="RecognizedText" />
-            <TextBlock Name="CurrentExecution" />
-        </StackPanel>
+            <StackPanel>
+                <CheckBox Content="Test Only" Name="cbTestOnlyMode" IsChecked="False" />
+                <Button Content="Listen" Width="100" Height="75" Click="Button_Click" />
+                <TextBlock Name="RecognizedText" />
+                <TextBlock Name="CurrentExecution" />
+            </StackPanel>
 
-    </DockPanel>
-    
 
+        </DockPanel>
+
+    </Grid>
 </Window>
