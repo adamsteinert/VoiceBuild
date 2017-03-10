@@ -26,17 +26,17 @@ namespace Vocal.Model
         /// <summary>
         /// The executable associated with the command
         /// </summary>
-        public string Executable { get; set; }
+        public string LaunchTarget { get; set; }
+
+        /// <summary>
+        /// The launcher to use when a default is not employed.
+        /// </summary>
+        public string LauncherKey { get; set; }
 
         /// <summary>
         /// Directory in which to execute the command.
         /// </summary>
         public string InitialDirectory { get; set; }
-
-
-        public string LauncherKey { get; set; }
-
-        public string LaunchArgs { get; set; }
 
         /// <summary>
         /// Builds a command string to be run within the execution environment
@@ -45,9 +45,9 @@ namespace Vocal.Model
         /// cd C:\source\JMC\champs && .\build.bat
         /// </summary>
         /// <returns></returns>
-        public string BuildCommandString()
+        public string BuildCommandStringInInitDirectory()
         {
-            return @"cd " + InitialDirectory + " & " + Executable + " ";
+            return @"cd " + InitialDirectory + " & " + LaunchTarget + " ";
         }
     }
 }

@@ -5,16 +5,16 @@ namespace Vocal.Executors
 {
     public class GenericProcessLauncher  : ILauncher
     {
-        Launcher _launcher;
+        CustomLauncher _launcher;
 
-        public GenericProcessLauncher(Launcher launcher)
+        public GenericProcessLauncher(CustomLauncher launcher)
         {
             this._launcher = launcher;
         }
 
         public IProcessHandle Execute(IVoiceCommand command)
         {
-            var proc = Process.Start(_launcher.Command, command.LaunchArgs);
+            var proc = Process.Start(_launcher.Process, command.LaunchTarget);
 
             return new ProcessHandle(proc);
         }

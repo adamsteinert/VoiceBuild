@@ -8,7 +8,7 @@ namespace Vocal.Model
 {
     public class CommandDefinition
     {
-        public LauncherDefinition[] Launchers { get; set; }
+        public CustomLauncher[] Launchers { get; set; }
 
         public VoiceCommand[] Commands { get; set; }
     }

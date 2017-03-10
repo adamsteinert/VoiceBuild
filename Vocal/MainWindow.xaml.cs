@@ -29,7 +29,7 @@ namespace Vocal
         SpeechRecognitionEngine _recognizer;
         VocalResponse _responder;
 
-        Dictionary<string, LauncherDefinition> _launchers = new Dictionary<string, LauncherDefinition>();
+        Dictionary<string, CustomLauncher> _launchers = new Dictionary<string, CustomLauncher>();
 
         public MainWindow()
         {
@@ -55,15 +55,34 @@ namespace Vocal
                 CurrentExecution.Text = "Unrecognized execution id " + executionId;
             }
 
-
-
-            var executor = new GenericCommandWindowLauncher(Launcher.CreateDefaultCmd());
-
-
-            executor.Execute(_enabledCommands[executionId]);
+            var command = _enabledCommands[executionId];
+            var launcher = GetLauncher(command);
+            launcher.Execute(command);
         }
 
-        private ILauncher GetLauncher()
+        private ILauncher GetLauncher(IVoiceCommand command)
+        {
+            Uri uriResult;
+
+            if (command == null)
+                throw new ArgumentNullException("command");
+
+            // Is user configured
+            if (_launchers.ContainsKey(command.LauncherKey))
+            {
+                return new GenericProcessLauncher(_launchers[command.LauncherKey]);
+            }
+            // Is regular URL
+            else if (Uri.TryCreate(command.LaunchTarget, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+            {
+                return new DefaultBrowserLauncher();
+            }
+            // Default
+            else
+            {
+                return new CommandConsoleLauncher(EmbeddedLauncher.CreateDefaultCmd());
+            }
+        }
 
         #endregion
 
@@ -88,9 +107,13 @@ namespace Vocal
                 var semantics = e.Result.Semantics;
                 var commandKey = semantics[GrammarKeys.SemanticKey_Command].Value.ToString();
 
-                _responder.Say(_enabledCommands[commandKey].ConfirmationText);
+                Task.Run(() =>
+                {
+                    _responder.Say(_enabledCommands[commandKey].ConfirmationText);
+                });
+                
 
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(2000);
 
                 System.Diagnostics.Debug.WriteLine("Found semantic key command" + commandKey);
 

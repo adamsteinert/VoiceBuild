@@ -12,7 +12,7 @@ namespace Vocal.Model
         /// cd C:\source\JMC\champs && .\build.bat
         /// </summary>
         /// <returns></returns>
-        string BuildCommandString();
+        string BuildCommandStringInInitDirectory();
 
         /// <summary>
         /// Confirmation text to be repeated back before command execution.
@@ -21,7 +21,7 @@ namespace Vocal.Model
         /// <summary>
         /// The executable associated with the command
         /// </summary>
-        string Executable { get; set; }
+        string LaunchTarget { get; set; }
         /// <summary>
         /// Unique identifier for the command.
         /// </summary>
@@ -36,7 +36,5 @@ namespace Vocal.Model
         string Utterance { get; set; }
 
         string LauncherKey { get; set; }
-
-        string LaunchArgs { get; set; }
     }
 }

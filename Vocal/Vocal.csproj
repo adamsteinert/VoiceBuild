@@ -65,7 +65,8 @@
     </ApplicationDefinition>
     <Compile Include="Core\ConfigBasedGrammarBuilder.cs" />
     <Compile Include="Core\JsonCommandLoader.cs" />
-    <Compile Include="Executors\GenericCommandWindowLauncher.cs" />
+    <Compile Include="Executors\CommandConsoleLauncher.cs" />
+    <Compile Include="Executors\DefaultBrowserLauncher.cs" />
     <Compile Include="Executors\GenericProcessLauncher.cs" />
     <Compile Include="Executors\ILauncher.cs" />
     <Compile Include="Executors\IProcessHandle.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\CommandDefinition.cs" />
     <Compile Include="Model\Configuration.cs" />
-    <Compile Include="Model\ExecutionEnvironment.cs" />
     <Compile Include="Model\IVoiceCommand.cs" />
     <Compile Include="Core\VocalResponse.cs" />
     <Page Include="MainWindow.xaml">
@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Launcher.cs" />
+    <Compile Include="Model\LauncherDefinition.cs" />
     <Compile Include="Model\VoiceCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
