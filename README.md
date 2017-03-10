@@ -25,6 +25,10 @@ Add new commands via the commands.json file that is created in the app directory
 - Executable: The command to run within InitialDirectory. Could be an executable, script etc... For example: 'msbuild SomeSolution.sln'
 - InitialDirectory: Iniitial directory for the command
 
+###### Launchers
+TODO: You can create custom Launch type by specifying ...
+
+
 
 ###### Wishlist
 
@@ -33,14 +37,16 @@ Add new commands via the commands.json file that is created in the app directory
 - _ Live in and activate via the system tray
 - _ Display loaded commands and descriptions.
 - _ Enable continuous listen mode
-- _ Enable different execution contexts beyond cmd window
-- - powershell, cmder, alternate VS environments
 - - User configurable
-- _ Expand range of commands. e
-- - .g. build, run, launch etc...
+- _ Expand range of commands. 
+- - e.g. build, run, launch etc...
 - - User configurable
 - _ Distributed execution across machines (akka)
 - _ Kick off CI builds
+- ++x++ Enable different execution contexts beyond cmd window
+- x Default browser by specifying URL
+- _ Expand on execution contexts.
+-   - powershell, cmder, alternate VS environments
 - ++x++ Enable test mode.
 - ++x++ Move configuration file to AppData
 

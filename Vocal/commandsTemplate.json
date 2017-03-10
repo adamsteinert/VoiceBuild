@@ -1,9 +1,36 @@
-﻿[
-  {
-    "Key": "Notepad",
-    "Utterance": "Notepad",
-    "ConfirmationText": "Running the test command that will launch notepad.",
-    "Executable": "notepad.exe",
-    "InitialDirectory": "C:\\Windows"
-  }
-]
+﻿{
+  // Define custom launchers to be started by a specific process
+  "Launchers": [
+    {
+      "Key": "IE",
+      "Process": "IExplore.exe"
+    }
+  ],
+
+  "Commands": [
+    {
+      "Key": "Notepad",
+      "Utterance": "Notepad",
+      "ConfirmationText": "Running a test command that will launch notepad.",
+      "LaunchTarget": "notepad.exe",
+      "InitialDirectory": "C:\\Windows"
+    },
+
+    // Launch via the IE Launcher directive
+    {
+      "Key": "Bing",
+      "Utterance": "Bing",
+      "ConfirmationText": "Launching BING in Internet Explorer.",
+      "LauncherKey": "IE",
+      "LaunchTarget": "http://www.bing.com/"
+    },
+
+    // Launch websites
+    {
+      "Key": "Google",
+      "Utterance": "Google",
+      "ConfirmationText": "Launching Google in the default browser.",
+      "LaunchTarget": "http://www.bing.com/"
+    }
+  ]
+}
