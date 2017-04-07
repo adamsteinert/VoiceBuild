@@ -66,7 +66,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Core\ConfigBasedGrammarBuilder.cs" />
+    <Compile Include="Core\BuildOnlyGrammarBuilder.cs" />
+    <Compile Include="Core\GrammarKeys.cs" />
+    <Compile Include="Core\IVocalGrammarBuilder.cs" />
     <Compile Include="Core\JsonCommandLoader.cs" />
     <Compile Include="Executors\CommandConsoleLauncher.cs" />
     <Compile Include="Executors\DefaultBrowserLauncher.cs" />
@@ -74,11 +76,12 @@
     <Compile Include="Executors\ILauncher.cs" />
     <Compile Include="Executors\IProcessHandle.cs" />
     <Compile Include="Executors\ProcessHandle.cs" />
-    <Compile Include="Model\AppSettings.cs" />
-    <Compile Include="Model\CommandDefinition.cs" />
-    <Compile Include="Model\Configuration.cs" />
-    <Compile Include="Model\IVoiceCommand.cs" />
+    <Compile Include="ModelOld\AppSettings.cs" />
+    <Compile Include="ModelOld\Configuration.cs" />
+    <Compile Include="ModelOld\IVoiceCommand.cs" />
     <Compile Include="Core\VocalResponse.cs" />
+    <Compile Include="VoiceActions\BuildSolutionAction.cs" />
+    <Compile Include="VoiceActions\IVoiceAction.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,9 +96,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Launcher.cs" />
-    <Compile Include="Model\LauncherDefinition.cs" />
-    <Compile Include="Model\VoiceCommand.cs" />
+    <Compile Include="ModelOld\Launcher.cs" />
+    <Compile Include="ModelOld\LauncherDefinition.cs" />
+    <Compile Include="ModelOld\ProjectConfiguration.cs" />
+    <Compile Include="ModelOld\VoiceCommand.cs" />
+    <Compile Include="Model\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,7 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Grammar\" />
+    <Folder Include="Grammars\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\Assets\mic_flat.ico">

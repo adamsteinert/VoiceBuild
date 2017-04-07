@@ -6,31 +6,31 @@ using Vocal.Model;
 
 namespace Vocal.Core
 {
-    public class JsonCommandLoader
+    public class JsonProjectLoader
     {
         const string AppDataFolder = "VocalBuildEngine";
         const string DefaultConfigFile = "commandsTemplate.json";
         const string WriteableCommandFile = "commands.json";
 
-        public static CommandDefinition LoadCommandsFromConfiguration()
+        public static ProjectConfiguration LoadCommandsFromConfiguration()
         {
-            var commandFile = GetDefaultPath(WriteableCommandFile);
+            var projectFile = GetDefaultPath(WriteableCommandFile);
 
-            if (!File.Exists(commandFile))
+            if (!File.Exists(projectFile))
             {
-                var file = new FileInfo(commandFile);
+                var file = new FileInfo(projectFile);
 
                 if (!Directory.Exists(file.Directory.FullName))
                     Directory.CreateDirectory(file.Directory.FullName);
 
-                CreateWriteableConfigFile(DefaultConfigFile, commandFile);
+                CreateWriteableConfigFile(DefaultConfigFile, projectFile);
             }
 
-            if (!File.Exists(commandFile))
-                throw new Exception($"There was an error creating the command configuration file {commandFile}. You may need to create this file manually.");
+            if (!File.Exists(projectFile))
+                throw new Exception($"There was an error creating the command configuration file {projectFile}. You may need to create this file manually.");
 
 
-            return JsonConvert.DeserializeObject<CommandDefinition>(File.ReadAllText(commandFile));
+            return JsonConvert.DeserializeObject<ProjectConfiguration>(File.ReadAllText(projectFile));
         }
 
        

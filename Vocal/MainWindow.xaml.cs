@@ -25,17 +25,15 @@ namespace Vocal
     /// </summary>
     public partial class MainWindow : Window
     {
-        Dictionary<string, IVoiceCommand> _enabledCommands;
+        Dictionary<string, Project> _projects;
         SpeechRecognitionEngine _recognizer;
         VocalResponse _responder;
 
-        Dictionary<string, CustomLauncher> _launchers = new Dictionary<string, CustomLauncher>();
 
         public MainWindow()
         {
             InitializeComponent();
             _recognizer = new SpeechRecognitionEngine();
-            _enabledCommands = new Dictionary<string, IVoiceCommand>();
             _responder =  new VocalResponse();
         }
 
@@ -50,39 +48,39 @@ namespace Vocal
       
         public void ExecuteCommandInList(string executionId)
         {
-            if(!_enabledCommands.ContainsKey(executionId))
-            {
-                CurrentExecution.Text = "Unrecognized execution id " + executionId;
-            }
+            //if(!_enabledCommands.ContainsKey(executionId))
+            //{
+            //    CurrentExecution.Text = "Unrecognized execution id " + executionId;
+            //}
 
-            var command = _enabledCommands[executionId];
-            var launcher = GetLauncher(command);
-            launcher.Execute(command);
+            //var command = _enabledCommands[executionId];
+            //var launcher = GetLauncher(command);
+            //launcher.Execute(command);
         }
 
-        private ILauncher GetLauncher(IVoiceCommand command)
-        {
-            Uri uriResult;
+        //private ILauncher GetLauncher(IVoiceCommand command)
+        //{
+        //    Uri uriResult;
 
-            if (command == null)
-                throw new ArgumentNullException("command");
+        //    if (command == null)
+        //        throw new ArgumentNullException("command");
 
-            // Is user configured
-            if (_launchers.ContainsKey(command.LauncherKey))
-            {
-                return new GenericProcessLauncher(_launchers[command.LauncherKey]);
-            }
-            // Is regular URL
-            else if (Uri.TryCreate(command.LaunchTarget, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
-            {
-                return new DefaultBrowserLauncher();
-            }
-            // Default
-            else
-            {
-                return new CommandConsoleLauncher(EmbeddedLauncher.CreateDefaultCmd());
-            }
-        }
+        //    // Is user configured
+        //    if (_launchers.ContainsKey(command.LauncherKey))
+        //    {
+        //        return new GenericProcessLauncher(_launchers[command.LauncherKey]);
+        //    }
+        //    // Is regular URL
+        //    else if (Uri.TryCreate(command.LaunchTarget, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
+        //    {
+        //        return new DefaultBrowserLauncher();
+        //    }
+        //    // Default
+        //    else
+        //    {
+        //        return new CommandConsoleLauncher(EmbeddedLauncher.CreateDefaultCmd());
+        //    }
+        //}
 
         #endregion
 
@@ -107,12 +105,15 @@ namespace Vocal
                 var semantics = e.Result.Semantics;
                 var commandKey = semantics[GrammarKeys.SemanticKey_Command].Value.ToString();
 
+
+
+                //TODO: enable cancellation
                 Task.Run(() =>
                 {
-                    _responder.Say(_enabledCommands[commandKey].ConfirmationText);
+                    _responder.Say("Confirming action, no custom text is implemented yet.");
                 });
-                
 
+                
                 System.Threading.Thread.Sleep(2000);
 
                 System.Diagnostics.Debug.WriteLine("Found semantic key command" + commandKey);
@@ -124,7 +125,7 @@ namespace Vocal
             }
             else
             {
-                RecognizedText.Text = "I did not understand your utterance";
+                RecognizedText.Text = "I was not able to understand what was just asked.";
             }
         }
 
@@ -144,20 +145,10 @@ namespace Vocal
 
         private void ReloadCommandsAndGrammar()
         {
-            var commandDef = ReloadVoiceCommands(_enabledCommands);
-            CreateLaunchers(commandDef);
+            //var commandDef = ReloadVoiceCommands(_enabledCommands);
+            //CreateLaunchers(commandDef);
 
-            RebuildGrammar(_recognizer, _enabledCommands);
-        }
-
-        private void CreateLaunchers(CommandDefinition commandDef)
-        {
-            _launchers.Clear();
-
-            foreach (var item in commandDef.Launchers)
-            {
-                _launchers.Add(item.Key, item);
-            }
+            //RebuildGrammar(_recognizer, _enabledCommands);
         }
 
         public static void RebuildGrammar(SpeechRecognitionEngine engine, Dictionary<string, IVoiceCommand> commandDictionary)
@@ -167,16 +158,16 @@ namespace Vocal
             engine.LoadGrammar(new Grammar(builder));
         }
 
-        public static CommandDefinition ReloadVoiceCommands(Dictionary<string, IVoiceCommand> commandDictionary)
+        public static ProjectConfiguration ReloadVoiceCommands(Dictionary<string, Project> projectDictionary)
         {
             try
             {
-                commandDictionary.Clear();
-                var definition = JsonCommandLoader.LoadCommandsFromConfiguration();
+                projectDictionary.Clear();
+                var definition = JsonProjectLoader.LoadCommandsFromConfiguration();
 
-                foreach (var item in definition.Commands)
+                foreach (var item in definition.Projects)
                 {
-                    commandDictionary.Add(item.Key, item);
+                    projectDictionary.Add(item.ProjectName, item);
                 }
 
                 return definition;

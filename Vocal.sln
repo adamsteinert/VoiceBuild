@@ -1,14 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vocal", "Vocal\Vocal.csproj", "{1D19A450-36E0-4C0B-97B8-3C741D051EB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A22F76C5-EAFC-4C04-88AF-30BA813A3197}"
 	ProjectSection(SolutionItems) = preProject
+		Notes.md = Notes.md
 		Readme.md = Readme.md
 	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "VocalFs.Core", "VocalFs.Core\VocalFs.Core.fsproj", "{D62691E7-8107-4089-8EAE-0C722D54F1F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +23,10 @@ Global
 		{1D19A450-36E0-4C0B-97B8-3C741D051EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D19A450-36E0-4C0B-97B8-3C741D051EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D19A450-36E0-4C0B-97B8-3C741D051EB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62691E7-8107-4089-8EAE-0C722D54F1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62691E7-8107-4089-8EAE-0C722D54F1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62691E7-8107-4089-8EAE-0C722D54F1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62691E7-8107-4089-8EAE-0C722D54F1F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
